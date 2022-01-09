@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Followed By",
+  "version": "0.0.1",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "exclude_matches": ["https://github.com/*/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
