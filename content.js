@@ -1,25 +1,10 @@
 const clientName = document.querySelector('meta[name="user-login"]').content;
 const currentUser = window.location.pathname.slice(1);
 
-let clientFollowing = [];
-let userFollowers = [];
+const followCountTag = document.querySelector(".vcard-details");
 
-fetch(`https://api.github.com/users/${clientName}/following?per_page=100`)
-    .then((response) => response.json())
-    .then((data) => {
-        clientFollowing = [...data];
-    })
-    .catch((error) => console.error(error));
+const tag = document.createElement("p");
+const text = document.createTextNode("No followers in common");
+tag.appendChild(text);
 
-fetch(`https://api.github.com/users/${currentUser}/followers?per_page=100`)
-    .then((response) => response.json())
-    .then((data) => {
-        userFollowers = [...data];
-        const filteredArray = clientFollowing.filter((value) =>
-            userFollowers.includes(value)
-        );
-    })
-    .catch((error) => console.error(error));
-
-// console.log(clientFollowing, userFollowers);
-// console.log(clientFollowing);
+followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
