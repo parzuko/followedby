@@ -5,28 +5,33 @@ const followCountTag = document.querySelector(".vcard-details");
 
 const getUserFollowing = async (userName, pageNumber) => {
     const response = await fetch(
-        `https://api.github.com/users/${userName}/following?per_page=100?page=${pageNumber}`
+        `https://api.github.com/users/${userName}/following?page=${pageNumber}`
     );
     return await response.json();
 };
 
 const getUserFollowers = async (userName, pageNumber) => {
     const response = await fetch(
-        `https://api.github.com/users/${userName}/followers?per_page=100?page=${pageNumber}`
+        `https://api.github.com/users/${userName}/followers?page=${pageNumber}`
     );
     return await response.json();
 };
 
 const getMultiPageResponse = async (getRequest, userName) => {
-    let list = null,
-        page = 1,
-        results = [];
-    do {
-        list = await getRequest(userName, page++);
-        console.log(list);
-        results = results.concat(list);
-    } while (list.length > 1);
+    let page = 1;
+    const results = [];
 
+    while (true) {
+        const nextPage = await getRequest(userName, page++);
+        if (nextPage.length === 30) {
+            results.push(...nextPage);
+            continue;
+        } else if (nextPage.length < 30 && nextPage.length > 1) {
+            results.push(...nextPage);
+            break;
+        }
+        break;
+    }
     return results;
 };
 
