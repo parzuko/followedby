@@ -52,19 +52,20 @@ const getOverlap = async () => {
     return filtered;
 };
 
-const tag = document.createElement("p");
+const tag = document.createElement("div");
 const text = document.createTextNode("No followers in common");
 tag.appendChild(text);
 
 followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
 
-getOverlap().then((common) =>
-    common.map(
+getOverlap().then((common) => {
+    tag.innerHTML = "";
+    return common.map(
         (person) =>
             (tag.innerHTML += `
             <a href=${person.html_url}>
                 <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
             </a>
 `)
-    )
-);
+    );
+});

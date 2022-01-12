@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "exclude_matches": ["https://github.com/*/*"],
+      "exclude_matches": ["https://github.com/*/*", "https://github.com/"],
       "js": ["content.js"]
     }
   ]
