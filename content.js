@@ -58,4 +58,13 @@ tag.appendChild(text);
 
 followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
 
-getOverlap().then((common) => console.log(common));
+getOverlap().then((common) =>
+    common.map(
+        (person) =>
+            (tag.innerHTML += `
+            <a href=${person.html_url}>
+                <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
+            </a>
+`)
+    )
+);
