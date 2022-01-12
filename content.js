@@ -5,14 +5,14 @@ const followCountTag = document.querySelector(".vcard-details");
 
 const getUserFollowing = async (userName, pageNumber) => {
     const response = await fetch(
-        `https://api.github.com/users/${userName}/following?page=${pageNumber}`
+        `https://api.github.com/users/${userName}/following?per_page=100&page=${pageNumber}`
     );
     return await response.json();
 };
 
 const getUserFollowers = async (userName, pageNumber) => {
     const response = await fetch(
-        `https://api.github.com/users/${userName}/followers?page=${pageNumber}`
+        `https://api.github.com/users/${userName}/followers?per_page=100&page=${pageNumber}`
     );
     return await response.json();
 };
@@ -23,10 +23,10 @@ const getMultiPageResponse = async (getRequest, userName) => {
 
     while (true) {
         const nextPage = await getRequest(userName, page++);
-        if (nextPage.length === 30) {
+        if (nextPage.length === 100) {
             results.push(...nextPage);
             continue;
-        } else if (nextPage.length < 30 && nextPage.length > 1) {
+        } else if (nextPage.length < 100 && nextPage.length > 1) {
             results.push(...nextPage);
             break;
         }
@@ -38,8 +38,6 @@ const getMultiPageResponse = async (getRequest, userName) => {
 const getOverlap = async () => {
     const followers = await getMultiPageResponse(getUserFollowing, clientName);
     const following = await getMultiPageResponse(getUserFollowers, currentUser);
-
-    console.log(followers, following);
 
     const filtered = [];
 
@@ -59,3 +57,5 @@ const text = document.createTextNode("No followers in common");
 tag.appendChild(text);
 
 followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
+
+getOverlap().then((common) => console.log(common));
