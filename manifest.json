@@ -9,5 +9,6 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["storage"]
+  "permissions": ["storage"],
+  "background": { "scripts": [ "background.js" ], "persistent": false }
 }
