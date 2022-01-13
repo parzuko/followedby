@@ -35,6 +35,19 @@ const getMultiPageResponse = async (getRequest, userName) => {
     return results;
 };
 
+async function getStorage(key) {
+    const p = new Promise(function (resolve, reject) {
+        chrome.storage.local.get(key, function (options) {
+            resolve(options);
+        });
+    });
+    return await p;
+}
+
+const setStorage = (key, value) => {
+    chrome.storage.local.set({ key: value });
+};
+
 const getOverlap = async () => {
     const followers = await getMultiPageResponse(getUserFollowing, clientName);
     const following = await getMultiPageResponse(getUserFollowers, currentUser);
@@ -58,14 +71,21 @@ tag.appendChild(text);
 
 followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
 
-getOverlap().then((common) => {
-    tag.innerHTML = "";
-    return common.map(
-        (person) =>
-            (tag.innerHTML += `
-            <a href=${person.html_url}>
-                <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
-            </a>
-`)
-    );
-});
+// getOverlap().then((common) => {
+//     tag.innerHTML = "";
+//     return common.map(
+//         (person) =>
+//             (tag.innerHTML += `
+//             <a href=${person.html_url}>
+//                 <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
+//             </a>
+// `)
+//     );
+// });
+
+// setStorage("Jivansh", [1, 2, 3, 4]);
+const key = "jivansh";
+const value = [1, 2, 3, 4, 4, 5];
+chrome.storage.local.set({ key: value });
+
+getStorage(key).then((data) => console.log(data));
