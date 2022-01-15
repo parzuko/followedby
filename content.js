@@ -44,8 +44,8 @@ async function getStorage(key) {
     return await p;
 }
 
-const setStorage = (key, value) => {
-    chrome.storage.local.set({ key: value });
+const setStorage = async ({ data }) => {
+    return await chrome.storage.local.set(data);
 };
 
 const getOverlap = async () => {
@@ -83,9 +83,11 @@ followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
 //     );
 // });
 
-// setStorage("Jivansh", [1, 2, 3, 4]);
-const key = "jivansh";
-const value = [1, 2, 3, 4, 4, 5];
-chrome.storage.local.set({ key: value });
+const getOrSet = async () => {
+    const data = { xbox: ["360", "One", "Series S", "Series S"] };
+    chrome.storage.local.set(data);
+    const newValue = await getStorage("xbox");
+    console.log(newValue);
+};
 
-getStorage(key).then((data) => console.log(data));
+getOrSet().catch(() => {});
