@@ -35,22 +35,38 @@ const getMultiPageResponse = async (getRequest, userName) => {
     return results;
 };
 
-async function getStorage(key) {
+const getStorage = async (key) => {
     const p = new Promise(function (resolve, reject) {
         chrome.storage.local.get(key, function (options) {
             resolve(options);
         });
     });
     return await p;
-}
+};
 
-const setStorage = async ({ data }) => {
-    return await chrome.storage.local.set(data);
+/*
+username - getfromstorage - return
+if null - getFunction - return 
+*/
+const getOrSet = async (getRequest, userName, forFollowers) => {
+    const people = await getStorage(userName);
+    if (Object.keys(people).length !== 0) {
+        return people;
+    }
+    // no stored values
+    const users = forFollowers
+        ? await getRequest(getUserFollowers, userName)
+        : await getRequest(getUserFollowing, userName);
+    console.log(users);
+    const data = { userName: users };
+    chrome.storage.local.set(data);
+    return users;
 };
 
 const getOverlap = async () => {
-    const followers = await getMultiPageResponse(getUserFollowing, clientName);
-    const following = await getMultiPageResponse(getUserFollowers, currentUser);
+    if (clientName === currentUser) return;
+    const followers = await getOrSet(getMultiPageResponse, clientName, false);
+    const following = await getOrSet(getMultiPageResponse, currentUser, true);
 
     const filtered = [];
 
@@ -71,23 +87,18 @@ tag.appendChild(text);
 
 followCountTag.insertBefore(tag, followCountTag.childNodes[0]);
 
-// getOverlap().then((common) => {
-//     tag.innerHTML = "";
-//     return common.map(
-//         (person) =>
-//             (tag.innerHTML += `
-//             <a href=${person.html_url}>
-//                 <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
-//             </a>
-// `)
-//     );
-// });
+getOverlap().then((common) => {
+    tag.innerHTML = "";
+    return common.map(
+        (person) =>
+            (tag.innerHTML += `
+            <a href=${person.html_url}>
+                <img src=${person.avatar_url} height=30 width=30 style="border-radius: 50%;"/>
+            </a>
+`)
+    );
+});
 
-const getOrSet = async () => {
-    const data = { xbox: ["360", "One", "Series S", "Series S"] };
-    chrome.storage.local.set(data);
-    const newValue = await getStorage("xbox");
-    console.log(newValue);
-};
-
-getOrSet().catch(() => {});
+// (async () => {
+//     await getOverlap();
+// })();
