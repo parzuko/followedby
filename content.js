@@ -36,8 +36,8 @@ const getMultiPageResponse = async (getRequest, userName) => {
 };
 
 const getStorage = async (key) => {
-    const p = new Promise(function (resolve, reject) {
-        chrome.storage.local.get(key, function (options) {
+    const p = new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (options) => {
             resolve(options);
         });
     });
@@ -50,16 +50,15 @@ if null - getFunction - return
 */
 const getOrSet = async (getRequest, userName, forFollowers) => {
     const people = await getStorage(userName);
+
     if (Object.keys(people).length !== 0) {
-        return people;
+        return people[userName];
     }
     // no stored values
     const users = forFollowers
         ? await getRequest(getUserFollowers, userName)
         : await getRequest(getUserFollowing, userName);
-    console.log(users);
-    const data = { userName: users };
-    chrome.storage.local.set(data);
+    await chrome.storage.local.set({ [userName]: users });
     return users;
 };
 
