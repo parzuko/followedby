@@ -12,7 +12,8 @@
   "permissions": ["storage"],
   "background": { "scripts": [ "background.js" ], "persistent": false },
   "web_accessible_resources": [
-      "src/app.js"
+      "src/app.js",
+      "src/modular.js"
   ]
   
 }
