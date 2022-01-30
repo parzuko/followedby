@@ -19,7 +19,7 @@ const getMultiPageResponse = async (getRequest, userName) => {
 };
 
 export const getOverlap = async (clientName, currentUser) => {
-    if (clientName === currentUser) return;
+    if (clientName === currentUser) return null;
     const followers = await getOrSet(getMultiPageResponse, clientName, false);
     const following = await getOrSet(getMultiPageResponse, currentUser, true);
 
