@@ -13,7 +13,9 @@
   "background": { "scripts": [ "background.js" ], "persistent": false },
   "web_accessible_resources": [
       "src/app.js",
-      "src/modular.js"
+      "src/utils/api.js",
+      "src/utils/storage.js",
+      "src/utils/aggregators.js"
   ]
   
 }

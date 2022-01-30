@@ -1,7 +1,7 @@
-import { getOverlap } from "./modular.js";
+import { getOverlap } from "./utils/aggregators.js";
+
 const clientName = document.querySelector('meta[name="user-login"]').content;
 const currentUser = window.location.pathname.slice(1);
-
 const followCountTag = document.querySelector(".vcard-details");
 
 export default (async () => {
@@ -13,9 +13,12 @@ export default (async () => {
 
     const commonFollowers = await getOverlap(clientName, currentUser);
 
-    if (commonFollowers.length === 0) {
+    if (!commonFollowers) {
+        tag.innerHTML = "";
         return;
     }
+
+    if (commonFollowers.length === 0) return;
 
     tag.innerHTML = "";
     return commonFollowers.map(
