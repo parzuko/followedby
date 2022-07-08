@@ -22,6 +22,7 @@ export const getOverlap = async (clientName, currentUser) => {
     if (clientName === currentUser) return null;
     const followers = await getOrSet(getMultiPageResponse, clientName, false);
     const following = await getOrSet(getMultiPageResponse, currentUser, true);
+    const OVERFLOW_COUNT = 2;
 
     const filtered = [];
 
@@ -33,5 +34,10 @@ export const getOverlap = async (clientName, currentUser) => {
             }
         }
     }
-    return filtered;
+    const remainingMutualFollowers = filtered.length - OVERFLOW_COUNT;
+    return {
+        commonFollowers: filtered.slice(0, OVERFLOW_COUNT),
+        remainingMutualFollowers:
+            remainingMutualFollowers > 0 ? remainingMutualFollowers : 0,
+    };
 };
