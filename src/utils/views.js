@@ -1,3 +1,9 @@
+/**
+ * Returns CTA image based on input follower object
+ *
+ * @param {object} follower object from the GitHub API
+ * @return {HTMLAnchorElement} HTML anchor tag redirecting to mutual follower profiles
+ */
 export const createFollowerCTA = follower => {
     const { login, avatar_url } = follower;
     return `
@@ -7,6 +13,12 @@ export const createFollowerCTA = follower => {
     `;
 };
 
+/**
+ * Returns a +n badge if any followers are hidden
+ *
+ * @param {number} remainingMutualFollowers The number of hidden followers
+ * @return {HTMLDivElement} HTML div with a +n badge
+ */
 export const showRemainingFollwers = remainingMutualFollowers => {
     if (remainingMutualFollowers < 1) return ``;
     return `
