@@ -1,4 +1,4 @@
 (async () => {
-    const src = chrome.extension.getURL("src/app.js");
+    const src = chrome.runtime.getURL("src/app.js");
     await import(src);
 })();

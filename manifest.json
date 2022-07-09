@@ -1,21 +1,30 @@
 {
-  "manifest_version": 2,
-  "name": "Followed By",
-  "version": "0.0.1",
-  "content_scripts": [
-    {
-      "matches": ["https://github.com/*", "https://github.com/*?tab=*"],
-      "exclude_matches": ["https://github.com/*/*", "https://github.com/"],
-      "js": ["content.js"]
-    }
-  ],
-  "permissions": ["storage"],
-  "background": { "scripts": [ "background.js" ], "persistent": false },
-  "web_accessible_resources": [
-      "src/app.js",
-      "src/utils/api.js",
-      "src/utils/storage.js",
-      "src/utils/aggregators.js",
-      "src/utils/views.js"
-  ] 
+    "manifest_version": 3,
+    "name": "Followed By",
+    "version": "1.0.1",
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*", "https://github.com/*?tab=*"],
+            "exclude_matches": [
+                "https://github.com/*/*",
+                "https://github.com/"
+            ],
+            "js": ["content.js"]
+        }
+    ],
+    "permissions": ["storage"],
+    "background": { "service_worker": "background.js" },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/app.js",
+                "src/utils/api.js",
+                "src/utils/storage.js",
+                "src/utils/aggregators.js",
+                "src/utils/views.js"
+            ],
+            "matches": [ "https://github.com/*" ],
+            "use_dynamic_url": true
+        }
+    ]
 }

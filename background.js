@@ -1,3 +1,3 @@
-chrome.runtime.onStartup.addListener(function () {
+chrome.runtime.onStartup.addListener(() => {
     chrome.storage.local.clear();
 });
