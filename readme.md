@@ -1,16 +1,21 @@
 # Followed By - For Github
 
-1. use `chrome.storage` before fetching :white_check_mark:
-2. `background.js` for removing from storage :white_check_mark:
-3. fix array structure for displaying
-4. modularize functions
-5. fix for when `clientName === currentUser` :white_check_mark:
-6. fix display location for avatars
-7. 
+ever visit someone’s @github profile and wonder — hmm, do we know each other? well here’s an easy fix to a self manifested problem ✨ getfollowedby.xyz  ✨ (working url soon)
 
+followed by uses GitHub’s public API to fetch mutual followers for every profile you visit, straight to the profile page!
 
-1. Add defintions for all functions
-2. Migrate to Manifest V3
-3. Hiding Edge Cases
-4. On load delay
-5. Readme Research
+## 🤩 want to use followed by?
+followed will soon be available on the chrome and firefox stores. for folks on safari, dev is under progress; for now, check out how to unpack extensions [here](https://youtu.be/oswjtLwCUqg)
+
+## 🛠 want to install followed by, locally?
+```bash
+git clone https://github.com/parzuko/followedby.git
+cd followedby
+```
+from here you can use the same unpacking process for extension!
+
+## 🫡 plans for the future?
+this project was made purely out of fun, to take my mind off things. feel free to contribute by creating issues/PRs and i will review them when i get the time. potential future features, might include `follows you` badges, safari support and migrating to typescript.
+
+made for fun, and maybe for myself ✌️
+say [hi](https://twitter.com/parzuko)!
