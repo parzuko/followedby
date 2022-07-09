@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "content_scripts": [
     {
-      "matches": ["https://github.com/*"],
+      "matches": ["https://github.com/*", "https://github.com/*?tab=*"],
       "exclude_matches": ["https://github.com/*/*", "https://github.com/"],
       "js": ["content.js"]
     }
@@ -15,7 +15,7 @@
       "src/app.js",
       "src/utils/api.js",
       "src/utils/storage.js",
-      "src/utils/aggregators.js"
-  ]
-  
+      "src/utils/aggregators.js",
+      "src/utils/views.js"
+  ] 
 }
