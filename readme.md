@@ -1,4 +1,4 @@
-# Followed By - For Github
+# Followed By - For GitHub
 
 ever visit someone’s @github profile and wonder — hmm, do we know each other? well here’s an easy fix to a self manifested problem ✨ getfollowedby.xyz  ✨ (working url soon)
 
