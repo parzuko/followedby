@@ -21,10 +21,12 @@ export const createFollowerCTA = follower => {
  */
 export const showRemainingFollwers = remainingMutualFollowers => {
     if (remainingMutualFollowers < 1) return ``;
+    const excessCount =
+        remainingMutualFollowers >= 999 ? 999 : remainingMutualFollowers;
     return `
         <div class="d-inline-block border text-center rounded-2 v-align-middle" style="width:35px;height:35px;line-height:33px;">
             <a href="?tab=followers" class="no-underline text-small color-fg-muted">
-                +${remainingMutualFollowers}
+                +${excessCount}
             </a>
         </div>
     `;
