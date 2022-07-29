@@ -8,7 +8,7 @@ ever visit someone’s GitHub profile and wonder — hmm, do we know each other?
   <img src=https://user-images.githubusercontent.com/57803819/178123752-c952c25a-a0ee-4487-b45a-ce6d6b3e0071.gif />
 </div>
 
-### 🤔 it’s cool, but is it any good?
+## 🤔 it’s cool, but is it any good?
 
 1. get set build: no package installs, `followedby` has 0 runtime dependancies
 2. your data is yours: no logging or storage on any server, because there ain’t any!
@@ -18,7 +18,7 @@ ever visit someone’s GitHub profile and wonder — hmm, do we know each other?
 ## 🤩 want to use followed by?
 followed by is available on the [chrome](https://getfollowedby.xyz/download/chrome) and [firefox](https://getfollowedby.xyz/download/firefox) stores. for folks on safari, dev is under progress; for now, check out how to unpack extensions [here](https://youtu.be/oswjtLwCUqg)
 
-## 🛠 want to install followed by, locally?
+## 🛠 want to install `followedby`, locally?
 ```bash
 git clone https://github.com/parzuko/followedby.git
 cd followedby
